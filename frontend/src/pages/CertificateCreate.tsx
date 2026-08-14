@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../lib/api";
 import { VerificationQR } from "../components/VerificationQR";
 import { CheckCircle2, Copy, Download } from "lucide-react";
+import { LogoMark } from "../components/LogoMark";
 
 const STEPS = ["Recipient", "Certificate", "Signatory", "Preview"];
 
@@ -49,6 +50,9 @@ export function CertificateCreate() {
     const verifyUrl = `${window.location.origin}/verify/${created.certificateId}`;
     return (
       <div className="max-w-md mx-auto px-6 py-20 text-center">
+        <div className="flex justify-center mb-6">
+          <LogoMark size={72} />
+        </div>
         <CheckCircle2 className="mx-auto text-emerald-500" size={48} />
         <h1 className="font-display text-2xl font-bold text-ink mt-4">Certificate Created</h1>
         <p className="text-sm text-slate-500 mt-1">Certificate ID</p>
@@ -84,6 +88,9 @@ export function CertificateCreate() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
+      <div className="flex justify-center mb-8">
+        <LogoMark size={52} />
+      </div>
       <div className="flex items-center gap-2 mb-8">
         {STEPS.map((s, i) => (
           <div key={s} className="flex items-center gap-2 flex-1">

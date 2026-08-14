@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { LogoMark } from "../components/LogoMark";
 
 export function Register() {
   const { register } = useAuth();
@@ -43,6 +44,9 @@ export function Register() {
 
   return (
     <div className="max-w-sm mx-auto px-6 py-16">
+      <div className="flex justify-center mb-6">
+        <LogoMark size={72} />
+      </div>
       <h1 className="font-display text-2xl font-bold text-ink mb-6">Create your organization</h1>
       {error && <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</div>}
       <form onSubmit={onSubmit} className="space-y-4">

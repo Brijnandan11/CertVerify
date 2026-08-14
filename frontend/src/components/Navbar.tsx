@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { ShieldCheck } from "lucide-react";
+import { LogoMark } from "./LogoMark";
 
 export function Navbar() {
   const { user, logout } = useAuth();
@@ -9,9 +9,8 @@ export function Navbar() {
   return (
     <nav className="border-b border-slate-200 bg-white">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold text-ink">
-          <ShieldCheck size={22} />
-          Devinx
+        <Link to="/" className="flex items-center">
+          <LogoMark size={36} showText textClassName="text-lg" />
         </Link>
         <div className="flex items-center gap-6 text-sm">
           {user ? (

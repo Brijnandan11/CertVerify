@@ -5,6 +5,7 @@ import { StatusBadge } from "../components/StatusBadge";
 import { VerificationQR } from "../components/VerificationQR";
 import { Certificate } from "../types";
 import { Download, Ban, Copy, Check } from "lucide-react";
+import { LogoMark } from "../components/LogoMark";
 
 export function CertificateDetail() {
   const { id } = useParams();
@@ -32,6 +33,9 @@ export function CertificateDetail() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
+      <div className="flex justify-center mb-6">
+        <LogoMark size={52} />
+      </div>
       <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6 flex items-center gap-6">
         <VerificationQR value={verifyUrl} size={120} />
         <div className="flex-1">

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowDown, FilePlus2, QrCode, ScanLine, BadgeCheck } from "lucide-react";
+import { LogoMark } from "../components/LogoMark";
 
 export function Landing() {
   const steps = [
@@ -12,6 +13,9 @@ export function Landing() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-24 text-center">
+      <div className="flex justify-center mb-6">
+        <LogoMark size={96} />
+      </div>
       <motion.h1
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { api } from "../lib/api";
 import { CheckCircle2, XCircle, AlertTriangle, HelpCircle } from "lucide-react";
 import { VerificationResult } from "../types";
+import { LogoMark } from "../components/LogoMark";
 
 export function Verify() {
   const { certificateId } = useParams();
@@ -60,6 +61,9 @@ export function Verify() {
 
   return (
     <div className="max-w-md mx-auto px-6 py-16">
+      <div className="flex justify-center mb-6">
+        <LogoMark size={72} />
+      </div>
       <div className={`border-2 rounded-2xl p-8 text-center ${v.box}`}>
         <Icon className={`mx-auto ${v.icon_c}`} size={52} />
         <h1 className={`font-display text-xl font-bold mt-4 ${v.title_c} tracking-wide`}>{v.title}</h1>
