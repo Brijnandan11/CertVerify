@@ -4,7 +4,7 @@ services:
     runtime: docker
     rootDir: .
     dockerfilePath: Dockerfile
-    plan: starter
+    plan: free
     healthCheckPath: /health
     autoDeploy: true
     envVars:
@@ -20,4 +20,4 @@ services:
         generateValue: true
 databases:
   - name: devinx-db
-    plan: starter
+    plan: free
