@@ -1,0 +1,10 @@
+# Prevent local dev files from leaking into the production image.
+# backend/.env contains the local DATABASE_URL (localhost:5439) — it must
+# never be baked into the Docker image that runs on Render.
+node_modules
+dist
+.env
+*.log
+pgdata
+*.tsbuildinfo
+.git
