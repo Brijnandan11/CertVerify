@@ -54,6 +54,22 @@ to that server's `/api/v1` URL.
 4. Download PDF (A4 landscape, embedded QR)
 5. Anyone opens `/verify/:certificateId` → public, no auth, shows VALID / REVOKED / EXPIRED / NOT FOUND
 
+## Deploy to Render (single service)
+
+The root `Dockerfile` (same build as `backend/Dockerfile`) serves both the API and
+the built frontend, so one web service is enough:
+
+1. Connect the repo to Render and use [render.yaml](/home/brij/certverify/render.yaml) as the blueprint.
+2. Render will create:
+   - one Web Service named `devinx`
+   - one PostgreSQL database named `devinx-db`
+3. Deploy. The backend container serves both the API and the built frontend at the same URL.
+4. If you configure it manually instead of using the blueprint, make sure:
+   - Root Directory is `/`
+   - Dockerfile Path is `Dockerfile`
+   - `DATABASE_URL` comes from Render Postgres
+   - `PUBLIC_APP_URL` and `CORS_ORIGIN` match the service URL, or let the app use `RENDER_EXTERNAL_URL`
+
 ## Tests
 ```bash
 cd backend && npm test

@@ -36,7 +36,7 @@ export async function createCertificate(organizationId: string, organizationName
       (organization_id, certificate_id, recipient_name, recipient_email, certificate_title,
        course_name, description, organization_name, internship_duration, completion_date, expiry_date,
        signatory_name, signatory_designation, certificate_hash, metadata)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
      RETURNING *`,
     [
       organizationId,
