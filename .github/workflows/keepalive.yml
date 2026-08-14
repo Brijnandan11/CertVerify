@@ -1,0 +1,19 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    # every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl devinx.onrender.com
+        run: |
+          set -e
+          URL="https://devinx.onrender.com"
+          echo "Pinging $URL"
+          # try a few times to avoid transient failures
+          curl -fsS --retry 3 "$URL" >/dev/null || true
