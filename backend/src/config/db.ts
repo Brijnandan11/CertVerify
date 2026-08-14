@@ -6,6 +6,9 @@ export const pool = new Pool({
   connectionString: env.databaseUrl,
   max: 10,
   idleTimeoutMillis: 30000,
+  // Render Postgres requires SSL; local dev (docker-compose/system PG) works
+  // with it too, so enable whenever NODE_ENV=production.
+  ssl: env.nodeEnv === "production" ? { rejectUnauthorized: false } : undefined,
 });
 
 pool.on("error", (err) => {
