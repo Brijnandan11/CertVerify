@@ -4,26 +4,48 @@
 Backend: Node.js, Express, TypeScript, PostgreSQL (raw SQL via `pg`), Zod, JWT, Pino, pdfkit, qrcode.
 Frontend: React, TypeScript, Vite, Tailwind CSS.
 
-## Setup
+## Single link (easiest)
+
+The backend serves the built frontend, so **one URL runs the whole app**:
+
+```bash
+cp backend/.env.example backend/.env
+# edit backend/.env — set JWT secrets + DATABASE_URL
+
+cd frontend && npm install && npm run build
+cd ../backend && npm install && npm run build && npm start
+```
+
+Open **http://localhost:4000** — frontend and API both work there.
+
+If your Postgres password contains `@`, encode it as `%40` in `DATABASE_URL`.
+
+## Full docker path (also a single link)
+
+```bash
+docker compose up --build
+```
+
+Open **http://localhost:4000** — the backend container serves both the API
+(`/api/v1`) and the built frontend. Postgres runs on port `5439`.
+
+## Local dev (hot reload, two ports)
 
 ```bash
 cp backend/.env.example backend/.env
 # edit backend/.env — set JWT secrets
 
 docker compose up -d postgres
-cd backend && npm install && npm run migrate && npm run dev
+cd backend && npm install && npm run dev   # migrations run automatically on start
 # in a second terminal
 cd frontend && npm install && npm run dev
 ```
 
-Backend: http://localhost:4000
-Frontend: http://localhost:5173
+Backend: http://localhost:4000 (API only)
+Frontend: http://localhost:5173 (proxies `/api` to the backend)
 
-## Full docker path
-
-```bash
-docker compose up --build
-```
+If your backend is running elsewhere, set `VITE_API_BASE_URL` in `frontend/.env`
+to that server's `/api/v1` URL.
 
 ## Core flow
 1. Register org + admin user → `/register`

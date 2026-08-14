@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: certverify
+      POSTGRES_PASSWORD: certverify
+      POSTGRES_DB: certverify
+    ports:
+      - "5439:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U certverify"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Single container serving both the API and the built frontend.
+  # Everything runs under one URL: http://localhost:4000
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://certverify:certverify@postgres:5432/certverify
+      PUBLIC_APP_URL: http://localhost:4000
+      CORS_ORIGIN: http://localhost:4000
+      FRONTEND_DIST_PATH: /app/public
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
