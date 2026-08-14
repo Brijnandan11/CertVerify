@@ -1,4 +1,4 @@
-name: Keep Render Alive
+name: Render Keepalive
 
 on:
   schedule:
@@ -6,15 +6,19 @@ on:
     - cron: '*/10 * * * *'
   workflow_dispatch: {}
 
+concurrency:
+  group: render-keepalive
+  cancel-in-progress: true
+
 jobs:
   ping:
     runs-on: ubuntu-latest
     timeout-minutes: 9
     steps:
-      - name: Curl devinx.onrender.com
+      - name: Ping Render health
         run: |
           set -euo pipefail
-          URL="https://devinx.onrender.com"
+          URL="https://devinx.onrender.com/health"
           echo "Pinging $URL"
           # Keep the ping short so the workflow cannot run long if Render is slow.
           curl -fsS --max-time 15 --connect-timeout 5 "$URL" >/dev/null
